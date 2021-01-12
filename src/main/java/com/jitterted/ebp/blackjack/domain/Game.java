@@ -1,5 +1,6 @@
-package com.jitterted.ebp.blackjack;
+package com.jitterted.ebp.blackjack.domain;
 
+import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleHand;
 import org.fusesource.jansi.Ansi;
 
 import java.util.Scanner;
@@ -153,6 +154,7 @@ public class Game {
     System.out.println(ConsoleHand.cardsAsString(playerHand));
     System.out.println(" (" + playerHand.displayValue() + ")");
   }
+
   public void playerHits() {
     playerHand.drawFrom(deck);
     playerDone = playerHand.isBusted();
