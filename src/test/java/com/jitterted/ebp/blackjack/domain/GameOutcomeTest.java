@@ -17,7 +17,7 @@ class GameOutcomeTest {
     game.playerHits();
 
     assertThat(game.determineOutcome())
-        .isEqualTo("You Busted, so you lose.  💸");
+        .isEqualTo(GameOutcome.PLAYER_BUSTS);
   }
 
 }
