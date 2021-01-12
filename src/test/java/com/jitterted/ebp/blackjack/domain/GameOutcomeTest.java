@@ -30,6 +30,9 @@ class GameOutcomeTest {
 
     assertThat(game.determineOutcome())
         .isEqualTo(GameOutcome.PLAYER_WINS_BLACKJACK);
+
+    assertThat(game.isPlayerDone())
+        .isTrue();
   }
 
 }
