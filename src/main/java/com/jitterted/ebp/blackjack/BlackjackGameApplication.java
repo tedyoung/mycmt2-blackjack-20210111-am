@@ -13,6 +13,7 @@ public class BlackjackGameApplication {
     SpringApplication.run(BlackjackGameApplication.class, args);
   }
 
+  // bridge from domain to Spring
   @Bean
   public Game createGame() {
     return new Game();
