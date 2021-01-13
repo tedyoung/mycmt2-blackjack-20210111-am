@@ -25,16 +25,31 @@ public class BlackjackController {
 
   @GetMapping("/game")
   public String viewGame(Model model) {
-    GameView gameView = GameView.of(game);
-    model.addAttribute("gameView", gameView);
-
+    populateModelWithGameView(model);
     return "blackjack";
   }
 
   @PostMapping("/hit")
   public String hitCommand() {
     game.playerHits();
+
+    if (game.isPlayerDone()) {
+      return "redirect:/done";
+    }
+
     return "redirect:/game";
+  }
+
+  private void populateModelWithGameView(Model model) {
+    GameView gameView = GameView.of(game);
+    model.addAttribute("gameView", gameView);
+  }
+
+  @GetMapping("/done")
+  public String gameDone(Model model) {
+    populateModelWithGameView(model);
+    model.addAttribute("outcome", game.determineOutcome().toString());
+    return "done";
   }
 
 }
