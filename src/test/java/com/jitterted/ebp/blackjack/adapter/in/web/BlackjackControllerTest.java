@@ -98,4 +98,18 @@ class BlackjackControllerTest {
     assertThat(outcome)
         .isNotBlank();
   }
+
+  @Test
+  public void standResultsInGamePlayerIsDone() throws Exception {
+    Game game = new Game();
+    BlackjackController blackjackController = new BlackjackController(game);
+    blackjackController.startGame();
+
+    String viewName = blackjackController.standCommand();
+
+    assertThat(game.isPlayerDone())
+        .isTrue();
+    assertThat(viewName)
+        .isEqualTo("redirect:/done");
+  }
 }

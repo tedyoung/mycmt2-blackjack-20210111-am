@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class BlackjackController {
 
+  // holding on to a reference to a Domain Entity violates separation of concerns/Hex Arch
   private final Game game;
 
   @Autowired
@@ -33,6 +34,10 @@ public class BlackjackController {
   public String hitCommand() {
     game.playerHits();
 
+    return redirectForGameState();
+  }
+
+  private String redirectForGameState() {
     if (game.isPlayerDone()) {
       return "redirect:/done";
     }
@@ -50,6 +55,13 @@ public class BlackjackController {
     populateModelWithGameView(model);
     model.addAttribute("outcome", game.determineOutcome().toString());
     return "done";
+  }
+
+  @PostMapping("/stand")
+  public String standCommand() {
+    game.playerStands();
+
+    return redirectForGameState();
   }
 
 }
